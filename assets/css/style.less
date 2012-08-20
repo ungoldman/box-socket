@@ -1,0 +1,73 @@
+@import 'reset';
+@import 'ui';
+
+html, body {
+  background: #000;
+  color: white;
+  font: normal 14px/1.4 "Lucida Sans", sans-serif;
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+#wrap {
+  padding: 30px 0 0;
+}
+
+#welcome {
+  margin-left: -150px;
+  margin-top: -50px;
+  text-align: center;
+  width: 300px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 10000;
+}
+
+#canvas {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
+}
+
+#field {
+  background: url(/images/field.png) 0 0 repeat;
+  border: 1px solid #373737;
+  height: 539px;
+  width: 659px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.box {
+  background: rgba(0,0,0,.5);
+  height: 57px;
+  width: 57px;
+  border: 1px solid #666;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  transition: all 0.1s linear;
+}
+
+#text {
+  color: white;
+  background: #222;
+  border: 1px solid #777;
+  display: block;
+  margin: 10px auto 20px;
+  outline: none;
+  width: 659px;
+}
+
+#notifications li {
+  background: #111;
+  border-color: #444;
+}

@@ -17,10 +17,12 @@ Move zig (pre-alpha)
 
 * jquery
 * [keymaster](https://github.com/madrobby/keymaster)
+* [prefixfree](https://github.com/LeaVerou/prefixfree)
+* [uikit](https://github.com/visionmedia/uikit)
 
 ## todo
 
-* players
+* <del>multiplayer</del>
 * state
 * collision detection
 * tetris?

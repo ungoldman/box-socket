@@ -4,6 +4,8 @@ var express = require('express')
   , partials = require('express-partials')
   , assets = require('connect-assets')
   , info = require('./package.json')
+
+  , util = require('./lib/util')
 ;
 
 app
@@ -35,6 +37,36 @@ app
   .use(app.router)
 ;
 
+
+//ayfkm db
+var users = {};
+function addUser(obj){ users[obj.id] = obj.pos }
+
+function updatePosition(user, direction){
+  switch(direction){
+  case 'left':
+    if (user.pos.x == 0) return false;
+    user.pos.x -= 60;
+    break;
+  case 'right':
+    if (user.pos.x >= 600) return false;
+    user.pos.x += 60;
+    break;
+  case 'up':
+    if (user.pos.y == 0) return false;
+    user.pos.y -= 60;
+    break;
+  case 'down':
+    if (user.pos.y >= 450) return false;
+    user.pos.y += 60;
+    break;
+  default:
+    console.log('not good');
+    return false;
+  };
+  return true;
+}
+
 app.get('/', function(req, res){
   res.render('index', {
     title: info.name,
@@ -49,11 +81,34 @@ var server = app.listen(app.get('port'), function(){
 var io = require('socket.io').listen(server);
 
 io.on('connection', function(socket){
-  socket.emit('message', 'user connected');
-  socket.on('message', function(data){
-    io.sockets.emit('message', data);
+  var user = {
+    id: Date.now(),
+    pos: {
+      x: 0,
+      y: 0
+    }
+  };
+
+  io.sockets.emit('user',user);
+
+  for (var id in users) {
+    socket.emit('user', {
+      id: id,
+      pos: users[id]
+    })
+  }
+
+  addUser(user);
+
+  socket.on('message', function(data){ io.sockets.emit('message', data) });
+
+  socket.on('move', function(data){
+    var update = updatePosition(user, data.direction);
+    if (update) io.sockets.emit('updatePosition',user);
   });
-  socket.on('move', function(dir){
-    io.sockets.emit('move',dir);
+
+  socket.on('disconnect', function(){
+    delete users[user.id];
+    io.sockets.emit('disconnect', user);
   });
 });
