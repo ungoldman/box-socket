@@ -15,14 +15,17 @@
   ;
 
   function init(){
-    socket = io.connect(location);
+    socket = io.connect(window.location.hostname);
     protobox = $('<div class="box"/>');
 
     $('#welcome').fadeOut(4000, function(){ $(this).remove() });
 
+    socket.on('welcome',function(data){
+      ui.notify(data.title, data.version).effect('slide');
+    })
+
     socket.on('message', function(data){
-      ui.notify('Message', data)
-      .effect('slide');
+      ui.notify('Message', data).effect('slide');
     });
 
     socket.on('user', function(user){

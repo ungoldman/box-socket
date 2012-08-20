@@ -67,9 +67,8 @@ function updatePosition(user, direction){
 
 app.get('/', function(req, res){
   res.render('index', {
-    title: info.name,
-    version: info.version
-  });
+    title: info.name
+  })
 });
 
 var server = app.listen(app.get('port'), function(){
@@ -97,6 +96,11 @@ io.on('connection', function(socket){
   }
 
   addUser(user);
+
+  socket.emit('welcome', {
+    title: info.name,
+    version: info.version
+  });
 
   socket.on('message', function(data){ io.sockets.emit('message', data) });
 
