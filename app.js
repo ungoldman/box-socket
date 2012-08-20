@@ -4,8 +4,6 @@ var express = require('express')
   , partials = require('express-partials')
   , assets = require('connect-assets')
   , info = require('./package.json')
-
-  , util = require('./lib/util')
 ;
 
 app
