@@ -31,10 +31,10 @@
     });
 
     socket.on('updatePosition', function(user){
-      $('#box-'+user.id).stop().animate({
+      $('#box-'+user.id).stop().css({
         left: user.pos.x + 'px',
         top: user.pos.y + 'px'
-      },100);
+      });
     });
 
     socket.on('disconnect', function(user){
