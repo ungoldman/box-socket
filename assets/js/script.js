@@ -3,16 +3,7 @@
 
 (function(window,$,undefined){
 
-  var socket
-    , protobox
-    , r = function(n){ return Math.round(Math.random()*n) }
-    , findById = function(arr, id) {
-        for (var i=0; i<arr.length; i++){
-          if (+arr[i].id === +id) return arr[i];
-        }
-        throw "Couldn't find object with id: " + id;
-      }
-  ;
+  var socket, protobox;
 
   function init(){
     socket = io.connect(window.location.hostname);
@@ -74,16 +65,6 @@
     key('down',function(){
       socket.emit('move', {
         direction: 'down'
-      });
-      return false;
-    });
-
-    key('c',function(){
-      var n = r(255);
-      var o = r(255);
-      $box.css({
-        'background': 'rgba('+n+','+n+','+n+',0.3)',
-        'border-color': 'rgba('+o+','+o+','+o+',0.6)'
       });
       return false;
     });
