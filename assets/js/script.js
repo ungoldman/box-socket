@@ -116,11 +116,11 @@
     });
 
     key('enter',function(){
-      $('<form><input type="text" id="send-message" placeholder="type your message"></form>').submit(function(e){
+      $('<form><input type="text" id="send" placeholder="type your message"></form>').submit(function(e){
         e.preventDefault();
-        socket.emit('message',$('#send-message').val());
+        if ($('#send').val() != '') socket.emit('message',$('#send').val());
         $(this).remove();
-      }).appendTo('#wrap').find('#send-message').focus();
+      }).appendTo('#wrap').find('#send').focus();
       return false;
     });
   }
