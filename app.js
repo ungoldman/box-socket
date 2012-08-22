@@ -41,22 +41,26 @@ var users = {};
 function addUser(obj){ users[obj.id] = obj.pos }
 
 function updatePosition(user, direction){
+  var incr = 60
+    , horiz = 340
+    , vert = 600;
+
   switch(direction){
   case 'left':
-    if (user.pos.x == 0) return false;
-    user.pos.x -= 60;
+    if (user.pos.x <= 0) return false;
+    user.pos.x -= incr;
     break;
   case 'right':
-    if (user.pos.x >= 600) return false;
-    user.pos.x += 60;
+    if (user.pos.x >= vert) return false;
+    user.pos.x += incr;
     break;
   case 'up':
-    if (user.pos.y == 0) return false;
-    user.pos.y -= 60;
+    if (user.pos.y <= 0) return false;
+    user.pos.y -= incr;
     break;
   case 'down':
-    if (user.pos.y >= 450) return false;
-    user.pos.y += 60;
+    if (user.pos.y >= horiz) return false;
+    user.pos.y += incr;
     break;
   default:
     console.log('not good');
@@ -67,7 +71,8 @@ function updatePosition(user, direction){
 
 app.get('/', function(req, res){
   res.render('index', {
-    title: info.name
+    name: info.name,
+    version: info.version
   })
 });
 
@@ -78,37 +83,30 @@ var server = app.listen(app.get('port'), function(){
 var io = require('socket.io').listen(server);
 
 io.on('connection', function(socket){
+  // instantiate user
   var user = {
     id: Date.now(),
-    pos: {
-      x: 0,
-      y: 0
-    }
+    pos: { x: 0, y: 0 }
   };
-
   io.sockets.emit('user',user);
-
-  for (var id in users) {
-    socket.emit('user', {
-      id: id,
-      pos: users[id]
-    })
-  }
-
+  for (var id in users) { socket.emit('user', { id: id, pos: users[id] }) }
   addUser(user);
 
-  socket.emit('welcome', {
-    title: info.name,
-    version: info.version
+  // receive messages
+  socket.on('message', function(data){
+    io.sockets.emit('message', {
+      id: user.id,
+      text: data
+    })
   });
 
-  socket.on('message', function(data){ io.sockets.emit('message', data) });
-
+  // receive moves
   socket.on('move', function(data){
     var update = updatePosition(user, data.direction);
     if (update) io.sockets.emit('updatePosition',user);
   });
 
+  // disconnect
   socket.on('disconnect', function(){
     delete users[user.id];
     io.sockets.emit('disconnect', user);

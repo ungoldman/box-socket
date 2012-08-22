@@ -1,73 +1,84 @@
-@import 'reset';
-@import 'ui';
+@import 'bootstrap/bootstrap';
 
 html, body {
-  background: #000;
-  color: white;
-  font: normal 14px/1.4 "Lucida Sans", sans-serif;
   height: 100%;
   width: 100%;
   position: relative;
+}
+
+h1 {
+  width: 660px;
+  margin: 0 auto;
+  padding: 20px 0 30px;
 }
 
 #wrap {
-  padding: 30px 0 0;
-}
+  width: 660px;
+  margin: 0 auto;
 
-#welcome {
-  margin-left: -150px;
-  margin-top: -50px;
-  text-align: center;
-  width: 300px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  z-index: 10000;
+  #field {
+    background: url(/img/field.png) 0 0 repeat;
+    border: 1px solid #bbb;
+    border-radius: 3px;
+    height: 419px;
+    width: 659px;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+
+    .box {
+      background: #fff;
+      border-radius: 3px;
+      height: 59px;
+      width: 59px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 10;
+      transition: all 0.1s linear;
+    }
+  }
+
+  #send-message {
+    display: block;
+    margin: 10px auto 20px;
+    outline: none;
+    width: 98%;
+  }
 }
 
 #canvas {
-  height: 100%;
-  width: 100%;
   position: absolute;
   top: 0;
   left: 0;
-  bottom: 0;
-  right: 0;
-  z-index: 1;
 }
 
-#field {
-  background: url(/images/field.png) 0 0 repeat;
-  border: 1px solid #373737;
-  height: 539px;
-  width: 659px;
-  margin: 0 auto;
-  position: relative;
-}
 
-.box {
-  background: rgba(0,0,0,.5);
-  height: 57px;
-  width: 57px;
-  border: 1px solid #666;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 10;
-  transition: all 0.1s linear;
+@tooltipColor: #000;
+.tooltip {
+  font-size: 15px;
 }
-
-#text {
-  color: white;
-  background: #222;
-  border: 1px solid #777;
-  display: block;
-  margin: 10px auto 20px;
-  outline: none;
-  width: 659px;
+.tooltip-inner {
+  background: @tooltipColor;
+  color: #fff;
+  opacity: .6;
 }
-
-#notifications li {
-  background: #111;
-  border-color: #444;
+.tooltip {
+  opacity: .6;
+  &.top .tooltip-arrow {
+    border-top-color: @tooltipColor;
+    opacity: .6;
+  }
+  &.right .tooltip-arrow {
+    border-right-color: @tooltipColor;
+    opacity: .6;
+  }
+  &.left .tooltip-arrow {
+    border-left-color: @tooltipColor;
+    opacity: .6;
+  }
+  &.bottom .tooltip-arrow {
+    border-bottom-color: @tooltipColor;
+    opacity: .6;
+  }
 }
