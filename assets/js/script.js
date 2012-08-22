@@ -7,7 +7,6 @@
   var socket, protobox, boxes = {};
 
   function drawBoard(){
-    //grid width and height
     var field = $('#field')
       , w = 661
       , h = 421
@@ -15,15 +14,14 @@
       , canvas = $('<canvas/>').attr({width: w, height: h}).appendTo('#field')
       , ctx = canvas.get(0).getContext("2d");
 
-    ctx.globalCompositeOperation = "source-over"
-    ctx.fillStyle                = "#f1f1f1"
+    ctx.globalCompositeOperation = "source-over";
+    ctx.fillStyle = "#f1f1f1";
     ctx.fillRect(0, 0, w, h);
 
     for (var x = 0; x <= w; x += dist) {
       ctx.moveTo(0.5 + x, 0);
       ctx.lineTo(0.5 + x, h);
     }
-
     for (var x = 0; x <= h; x += dist) {
       ctx.moveTo(0, 0.5 + x);
       ctx.lineTo(w, 0.5 + x);
@@ -37,12 +35,6 @@
     // drawBoard();
     socket = io.connect(window.location.hostname);
     protobox = $('<div class="box"/>');
-
-    $('#welcome').fadeOut(4000, function(){ $(this).remove() });
-
-    socket.on('welcome',function(data){
-      ui.notify(data.title, data.version).effect('slide');
-    })
 
     socket.on('message', function(data){
       if (boxes[data.id]) clearTimeout(boxes[data.id]);
@@ -85,40 +77,21 @@
       if(user != undefined) $('#box-'+user.id).remove();
     });
 
-    key('left',function(){
-      socket.emit('move', {
-        direction: 'left'
+    $.map(['left','right','up','down'], function(n,i){
+      key(n, function(){
+        socket.emit('move', { direction: n });
+        return false;
       });
-      return false;
-    });
-
-    key('right',function(){
-      socket.emit('move', {
-        direction: 'right'
-      });
-      return false;
-    });
-
-    key('up',function(){
-      socket.emit('move', {
-        direction: 'up'
-      });
-      return false;
-    });
-
-    key('down',function(){
-      socket.emit('move', {
-        direction: 'down'
-      });
-      return false;
     });
 
     key('enter',function(){
-      $('<form><input type="text" id="send" placeholder="type your message"></form>').submit(function(e){
+      $('<form/>').submit(function(e){
         e.preventDefault();
         if ($('#send').val() != '') socket.emit('message',$('#send').val());
         $(this).remove();
-      }).appendTo('#wrap').find('#send').focus();
+      })
+      .append('<input type="text" id="send" placeholder="type your message">')
+      .appendTo('#wrap').find('#send').focus();
       return false;
     });
   }
