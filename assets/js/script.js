@@ -4,9 +4,7 @@
 
 (function(window,$,undefined){
 
-  var socket, protobox;
-
-  window.box = {};
+  var socket, protobox, boxes = {};
 
   function drawBoard(){
     //grid width and height
@@ -47,7 +45,7 @@
     })
 
     socket.on('message', function(data){
-      if (window.box[data.id]) clearTimeout(window.box[data.id]);
+      if (boxes[data.id]) clearTimeout(boxes[data.id]);
       $('#box-'+data.id)
         .tooltip('destroy')
         .tooltip({
@@ -57,7 +55,7 @@
           delay: { show: 500, hide: 100 }
         })
         .tooltip('show');
-      window.box[data.id] = setTimeout(function(){
+      boxes[data.id] = setTimeout(function(){
         $('#box-'+data.id).tooltip('destroy');
       },7500);
     });
