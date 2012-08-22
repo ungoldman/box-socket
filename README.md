@@ -18,7 +18,7 @@ Move zig (pre-alpha)
 * jquery
 * [keymaster](https://github.com/madrobby/keymaster)
 * [prefixfree](https://github.com/LeaVerou/prefixfree)
-* [uikit](https://github.com/visionmedia/uikit)
+* [bootstrap](https://github.com/twitter/bootstrap)
 
 ## todo
 
