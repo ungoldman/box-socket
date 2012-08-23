@@ -75,9 +75,8 @@ in the context of a two dimensional (or multi-dimensional) array? Would using
 an actual array cause problems? (Two many connections accessing and writing
 to same object?). Would be nice to have some kind of representative object to
 map terrain properties to for future experiments. Maybe just have a couchdb doc
-that has dual IDs for pos, then query if an entry exists -- maybe like one for
-users, one for terrain, even another one for other weird objects, npcs, god
-knows what. hrmm....
+that with queries for pos, -- one for users, one for terrain, even another one
+for other weird objects, npcs, god knows what. hrmm....
 */
 
 function updatePosition(user, direction){
