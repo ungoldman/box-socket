@@ -56,8 +56,8 @@
       if ($('#box-'+user.id).length > 0) return false;
       var $box = protobox.clone();
       $box.css({
-        left: user.pos.x + 'px',
-        top: user.pos.y + 'px',
+        left: user.pos.x * 60 + 'px',
+        top: user.pos.y * 60 + 'px',
       })
       .attr('id','box-'+user.id)
       .appendTo($('#field'));
@@ -65,8 +65,8 @@
 
     socket.on('updatePosition', function(user){
       $('#box-'+user.id).stop().css({
-        left: user.pos.x + 'px',
-        top: user.pos.y + 'px'
+        left: user.pos.x * 60 + 'px',
+        top: user.pos.y * 60 + 'px'
       });
       setTimeout(function(){
         $('#box-'+user.id).tooltip('show');

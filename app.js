@@ -39,11 +39,51 @@ app
 //ayfkm db
 var users = {};
 function addUser(obj){ users[obj.id] = obj.pos }
+/* teh future:
+use a two-dimensional array to
+track users and collisions, e.g.
+var map =
+[
+  [0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,j,k,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0,0,0]
+]
+j tries to move right, k is already there, x absorbs y?
+amoeba, the game! how do you deal with growth in a multidimensional array?
+e.g. objects that are larger than one cell?
+probably use a different paradigm. :[
+
+coordinate system along the lines of
+j: {
+  pos: {
+    x: 3,
+    y: 3
+  }
+}
+equivalent to j's position above, or map[3][3]!! pretty cool.
+(k would be map[3][4])
+
+client can map position however it sees fit (e.g. pos.x * 60).
+no need to track pixel position on server side. that's fucking crazy!
+
+so the question for now, how to efficiently store and compare user positions
+in the context of a two dimensional (or multi-dimensional) array? Would using
+an actual array cause problems? (Two many connections accessing and writing
+to same object?). Would be nice to have some kind of representative object to
+map terrain properties to for future experiments. Maybe just have a couchdb doc
+that has dual IDs for pos, then query if an entry exists -- maybe like one for
+users, one for terrain, even another one for other weird objects, npcs, god
+knows what. hrmm....
+*/
 
 function updatePosition(user, direction){
-  var incr = 60
-    , horiz = 340
-    , vert = 600;
+  var incr = 1
+    , horiz = 6
+    , vert = 10;
 
   switch(direction){
   case 'left':
