@@ -1,6 +1,6 @@
 # Box Socket
 
-Move zig (pre-alpha)
+Move zig (pre-sub-alpha)
 
 ## dependencies
 

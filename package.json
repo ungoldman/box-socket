@@ -1,8 +1,14 @@
 {
   "name": "box-socket",
   "version": "0.0.1-7",
+  "description": "Move zig",
+  "homepage": "http://github.com/ngoldman/box-socket",
   "private": true,
   "main": "app.js",
+  "author": {
+    "name": "Nate Goldman <nate@ngoldman.me>",
+    "url": "http://github.com/ngoldman"
+  },
   "scripts": {
     "start": "node app.js"
   },
@@ -17,6 +23,10 @@
   "engines": {
     "node": "0.8.x",
     "npm": "1.1.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ngoldman/box-socket.git"
   },
   "subdomain": "box-socket"
 }
