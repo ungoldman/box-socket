@@ -72,11 +72,14 @@ no need to track pixel position on server side. that's fucking crazy!
 
 so the question for now, how to efficiently store and compare user positions
 in the context of a two dimensional (or multi-dimensional) array? Would using
-an actual array cause problems? (Two many connections accessing and writing
+an actual array cause problems? (Too many connections accessing and writing
 to same object?). Would be nice to have some kind of representative object to
 map terrain properties to for future experiments. Maybe just have a couchdb doc
-that with queries for pos, -- one for users, one for terrain, even another one
+that queries for position -- one for users, one for terrain, even another one
 for other weird objects, npcs, god knows what. hrmm....
+
+async call to query for all objects in vicinity of player, extend single {}
+with deets, send to user on init, update as necessary..
 */
 
 function updatePosition(user, direction){
