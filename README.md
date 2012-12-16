@@ -1,28 +1,25 @@
 # Box Socket
 
-Move zig (pre-sub-alpha)
+A simple demonstration of multiplayer interaction with [socket.io](http://socket.io/).
 
 ## dependencies
 
 ### back end
 
-* express
-* ejs
-* socket.io
-* connect-assets
-* express-partials
-* less
+* [socket.io](http://socket.io)
+* [express](https://npmjs.org/package/express)
+* [ejs](https://npmjs.org/package/ejs)
+* [less](https://npmjs.org/package/less)
+* [connect-assets](https://npmjs.org/package/connect-assets)
+* [express-partials](https://npmjs.org/package/express-partials)
 
 ### front end
 
-* jquery
-* [keymaster](https://github.com/madrobby/keymaster)
-* [prefixfree](https://github.com/LeaVerou/prefixfree)
+* [jquery](http://jquery.com)
 * [bootstrap](https://github.com/twitter/bootstrap)
+* [prefixfree](https://github.com/LeaVerou/prefixfree)
+* [keymaster](https://github.com/madrobby/keymaster)
 
-## todo
+## URL
 
-* <del>multiplayer</del>
-* state
-* collision detection
-* tetris?
+[box-socket.herokuapp.com](http://box-socket.herokuapp.com)

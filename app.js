@@ -1,10 +1,8 @@
 var express = require('express')
   , app = express()
-
   , partials = require('express-partials')
   , assets = require('connect-assets')
-  , info = require('./package.json')
-;
+  , info = require('./package.json');
 
 app
   .set('port', process.env.PORT || 3000)
@@ -19,65 +17,21 @@ app
   .use(express.static(__dirname + '/public'))
   .use(partials())
   .use(assets())
-
   .configure('development', function(){
     app
       .use(express.logger('dev'))
       .use(express.errorHandler({ dumpExceptions: true, showStack: true }))
   })
-
   .configure('production', function(){
     app
       .use(express.logger())
       .use(express.errorHandler())
   })
+  .use(app.router);
 
-  .use(app.router)
-;
-
-
-//ayfkm db
 var users = {};
+
 function addUser(obj){ users[obj.id] = obj.pos }
-/* teh future:
-use a two-dimensional array to
-track users and collisions, e.g.
-var map =
-[
-  [0,0,0,0,0,0,0,0,0,0,0],
-  [0,0,0,0,0,0,0,0,0,0,0],
-  [0,0,0,0,0,0,0,0,0,0,0],
-  [0,0,0,j,k,0,0,0,0,0,0],
-  [0,0,0,0,0,0,0,0,0,0,0],
-  [0,0,0,0,0,0,0,0,0,0,0],
-  [0,0,0,0,0,0,0,0,0,0,0]
-]
-j tries to move right, k is already there, x absorbs y?
-amoeba, the game! how do you deal with growth in a multidimensional array?
-e.g. objects that are larger than one cell?
-probably use a different paradigm. :[
-
-coordinate system along the lines of
-j: {
-  pos: {
-    x: 3,
-    y: 3
-  }
-}
-equivalent to j's position above, or map[3][3]!! pretty cool.
-(k would be map[3][4])
-
-client can map position however it sees fit (e.g. pos.x * 60).
-no need to track pixel position on server side. that's fucking crazy!
-
-so the question for now, how to efficiently store and compare user positions
-in the context of a two dimensional (or multi-dimensional) array? Would using
-an actual array cause problems? (Two many connections accessing and writing
-to same object?). Would be nice to have some kind of representative object to
-map terrain properties to for future experiments. Maybe just have a couchdb doc
-that with queries for pos, -- one for users, one for terrain, even another one
-for other weird objects, npcs, god knows what. hrmm....
-*/
 
 function updatePosition(user, direction){
   var incr = 1
@@ -120,6 +74,14 @@ var server = app.listen(app.get('port'), function(){
 });
 
 var io = require('socket.io').listen(server);
+
+// for heroku
+if(process.env.LONG_POLLING_REQUIRED){
+  io.configure(function () {
+    io.set("transports", ["xhr-polling"]);
+    io.set("polling duration", 10);
+  });
+}
 
 io.on('connection', function(socket){
   // instantiate user

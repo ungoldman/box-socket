@@ -1,7 +1,7 @@
 {
   "name": "box-socket",
-  "version": "0.0.1-7",
-  "description": "Move zig",
+  "version": "0.0.1-8",
+  "description": "A simple demonstration of multiplayer interaction with socket.io",
   "homepage": "http://github.com/ngoldman/box-socket",
   "private": true,
   "main": "app.js",
