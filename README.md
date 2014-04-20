@@ -1,6 +1,6 @@
 # Box Socket
 
-A simple demonstration of multiplayer interaction with [socket.io](http://socket.io/).
+A simple demonstration of real-time multiplayer interaction with Node.js and WebSockets.
 
 ## dependencies
 
@@ -19,7 +19,3 @@ A simple demonstration of multiplayer interaction with [socket.io](http://socket
 * [bootstrap](https://github.com/twitter/bootstrap)
 * [prefixfree](https://github.com/LeaVerou/prefixfree)
 * [keymaster](https://github.com/madrobby/keymaster)
-
-## URL
-
-[box-socket.herokuapp.com](http://box-socket.herokuapp.com)
