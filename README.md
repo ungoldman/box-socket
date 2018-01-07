@@ -1,5 +1,7 @@
 # Box Socket
 
+![screenshot](screenshot.png)
+
 A simple demonstration of real-time multiplayer interaction with Node.js and WebSockets.
 
 ## dependencies
@@ -19,3 +21,7 @@ A simple demonstration of real-time multiplayer interaction with Node.js and Web
 * [bootstrap](https://github.com/twitter/bootstrap)
 * [prefixfree](https://github.com/LeaVerou/prefixfree)
 * [keymaster](https://github.com/madrobby/keymaster)
+
+## License
+
+ISC
