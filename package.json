@@ -1,32 +1,32 @@
 {
   "name": "box-socket",
-  "version": "0.0.1-8",
   "description": "A simple demonstration of multiplayer interaction with socket.io",
-  "homepage": "http://github.com/ngoldman/box-socket",
-  "private": true,
-  "main": "app.js",
+  "version": "0.1.0",
   "author": {
-    "name": "Nate Goldman <nate@ngoldman.me>",
+    "name": "Nate Goldman <ungoldman@gmail.com>",
     "url": "http://github.com/ngoldman"
   },
-  "scripts": {
-    "start": "node app.js"
-  },
   "dependencies": {
-    "express": "3.0.0rc1",
-    "ejs": "*",
-    "socket.io": "~0.9.10",
     "connect-assets": "~2.3.3",
+    "ejs": "*",
+    "express": "3.0.0rc1",
     "express-partials": "0.0.5",
-    "less": "~1.3.0"
+    "less": "~1.3.0",
+    "socket.io": "~0.9.10"
   },
   "engines": {
     "node": "0.8.x",
     "npm": "1.1.x"
   },
+  "homepage": "http://github.com/ngoldman/box-socket",
+  "license": "ISC",
+  "main": "app.js",
+  "private": true,
   "repository": {
     "type": "git",
     "url": "git://github.com/ngoldman/box-socket.git"
   },
-  "subdomain": "box-socket"
+  "scripts": {
+    "start": "node app.js"
+  }
 }
