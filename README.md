@@ -4,6 +4,8 @@
 
 A simple demonstration of real-time multiplayer interaction with Node.js and WebSockets.
 
+Created August 2012.
+
 ## dependencies
 
 ### back end
