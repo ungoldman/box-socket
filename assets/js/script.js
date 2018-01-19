@@ -91,7 +91,7 @@
         $(this).remove();
       })
       .append('<input type="text" id="send" placeholder="type your message">')
-      .appendTo('#wrap').find('#send').focus();
+      .insertAfter('.controls').find('#send').focus();
       return false;
     });
   }
